@@ -1,8 +1,19 @@
-# React + Vite
+# Sistema de E-commerce em Desenvolvimento
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um sistema de e-commerce em desenvolvimento, construído em colaboração com um amigo. Estamos utilizando uma API desenvolvida por ele, juntamente com o banco de dados que também foi criado por ele.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Front-end:**
+  - React
+  - SCSS (Sass)
+
+- **Back-end:**
+  - Spring Boot
+  - SQL (banco de dados)
+
+## Sobre a API
+
+A API utilizada neste projeto está disponível no seguinte repositório:
+
+- [Repositório da API](https://github.com/Domiuau/testeapiuaustora)
