@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo&family=Montserrat&family=Oswald&family=Raleway&family=Roboto&display=swap");
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -22,6 +23,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 }
 .secaoLogin .cardLogin form {
   display: flex;
@@ -29,4 +31,46 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  width: 100%;
+}
+.secaoLogin .cardLogin form legend {
+  font-size: 32px;
+  font-family: "Exo", sans-serif;
+  color: white;
+}
+.secaoLogin .cardLogin form .inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.secaoLogin .cardLogin form .inputs .inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.secaoLogin .cardLogin form .inputs .inputContainer input {
+  border: none;
+  background-color: transparent;
+  padding: 8px 0 8px 5px;
+  border-bottom: 2px solid white;
+  color: white;
+  width: 80%;
+  font-family: "Exo", sans-serif;
+}
+.secaoLogin .cardLogin form .inputs .inputContainer input::-moz-placeholder {
+  color: white;
+  opacity: 1;
+}
+.secaoLogin .cardLogin form .inputs .inputContainer input::placeholder {
+  color: white;
+  opacity: 1;
+}
+.secaoLogin .cardLogin form button {
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  font-family: "Exo", sans-serif;
 }/*# sourceMappingURL=styles.css.map */

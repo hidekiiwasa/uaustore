@@ -1,15 +1,62 @@
 .secaoLogin {
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flex-column-center-center;
+    
     .cardLogin {
-        background-color: #007FFF;
+        background-color: $azul-eletrico;
         height: 60%;
         width: 20%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @include flex-column-center-center;
+        border-radius: 10px;
+        
+        form {
+            @include flex-column-center-center;
+            gap: 2rem;
+            width: 100%;
+
+            legend {
+                font-size: 32px;
+                font-family: $fonte-exo;
+                color: white;
+            }
+
+            .inputs {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+
+                .inputContainer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    
+                    
+                    input {
+                        border: none;
+                        background-color: transparent;
+                        padding: 8px 0 8px 5px;
+                        border-bottom: 2px solid white;
+                        color: white;
+                        width: 80%;
+                        font-family: $fonte-exo;
+                    }
+                    
+                    input::placeholder {
+                        color: white;
+                        opacity: 1; 
+                    }
+                }
+            }
+
+            button {
+                width: 200px;
+                height: 40px;
+                border-radius: 20px;
+                border: none;
+                font-family: $fonte-exo;
+            }
+        }
     }
 }
