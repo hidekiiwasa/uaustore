@@ -1,4 +1,6 @@
 import { } from 'react';
+import { FaUser } from "react-icons/fa";
+import { MdOutlinePassword } from "react-icons/md";
 
 function Login() {
     return (
@@ -6,18 +8,18 @@ function Login() {
             <div className='secaoLogin'>
                 <div className="cardLogin">
                     <form action="POST">
-                        <legend>Login</legend>
+                        <legend>LOGIN</legend>
                         <div className="inputs">
                             <div className="inputContainer">
-                                <label htmlFor="usuario">Senha</label>
+                                <label htmlFor="usuario"><FaUser /></label>
                                 <input type="text" name="usuario"placeholder="Digite o seu usuário"/>
                             </div>
                             <div className="inputContainer">
-                                <label htmlFor="password">Senha</label>
+                                <label htmlFor="password"><MdOutlinePassword /></label>
                                 <input type="password" name="senha" placeholder="Digite a sua senha"/>
                             </div>
                         </div>
-                        <button>Logar</button>
+                        <button>LOGAR</button>
                     </form>
                 </div>
             </div>
