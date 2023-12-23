@@ -7,7 +7,7 @@ import App from './App.jsx';
 
 const router = createBrowserRouter([
   {
-    path: '/login',
+    path: '/',
     element: <App />,
 
     children:[
