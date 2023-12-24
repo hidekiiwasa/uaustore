@@ -6,11 +6,12 @@ Este é um sistema de e-commerce em desenvolvimento, construído em colaboraçã
 
 - **Front-end:**
   - React
+  - Node.js
   - SCSS (Sass)
 
 - **Back-end:**
   - Spring Boot
-  - SQL (banco de dados)
+  - PostgreSQL (banco de dados)
 
 ## Sobre a API
 
