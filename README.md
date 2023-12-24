@@ -15,6 +15,6 @@ Este é um sistema de e-commerce em desenvolvimento, construído em colaboraçã
 
 ## Sobre a API
 
-A API utilizada neste projeto está disponível no seguinte repositório:
+A API utilizada:
 
 - [Repositório da API](https://github.com/Domiuau/testeapiuaustora)
