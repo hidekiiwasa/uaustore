@@ -14,37 +14,51 @@ function Login() {
       setLogin({ ...login, [name]: value });
     };
 
-    const handleSubmit = async(e) => {
-      
-      e.preventDefault();
-      
-      fetch('https://testeuaustorafrotaf.onrender.com/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(login),
-      })
-        .then(response => {
-          if (!response.ok) {
+    const enviarRequisicaoLogin = async (loginData) => {
+      try {
+        const response = await fetch('https://testeuaustorafrotaf.onrender.com/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Bad response')
+        }
+    
+        if (response.ok) {
+          return response.json();
+        } else {
+          if (response.status === 401) {
+            throw new Error('Credenciais inválidas');
+          } else {
             throw new Error('Erro ao fazer login');
           }
-          return response.json();
-        })
-        .then(data => {
-          const token = data;
-          console.log('Token:', token);
-        })
-        .catch(error => {
-          console.error('Erro:', error);
-        });
-    }
+        }
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
+    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      try {
+        const data = await enviarRequisicaoLogin(login);
+        console.log('Token:', data);
+        
+      } catch (error) {
+        console.error('Erro:', error.message);
+      }
+    };
       
       
 
 return (
     <>
-        <div className='secaoLogin'>
+        <div className="secaoLogin">
             <div className="cardLogin">
                 <form onSubmit={handleSubmit}>
                     <legend>LOGIN</legend>
