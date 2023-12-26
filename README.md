@@ -6,14 +6,15 @@ Este é um sistema de e-commerce em desenvolvimento, construído em colaboraçã
 
 - **Front-end:**
   - React
+  - Node.js
   - SCSS (Sass)
 
 - **Back-end:**
   - Spring Boot
-  - SQL (banco de dados)
+  - PostgreSQL (banco de dados)
 
 ## Sobre a API
 
-A API utilizada neste projeto está disponível no seguinte repositório:
+A API utilizada:
 
 - [Repositório da API](https://github.com/Domiuau/testeapiuaustora)
