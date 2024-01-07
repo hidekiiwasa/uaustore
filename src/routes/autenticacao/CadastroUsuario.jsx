@@ -3,7 +3,6 @@ import Card from '../../components/CardAutenticacao'
 
 function CadastroUsuario() {
 
-
     
     return(
         <>
