@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { MdOutlinePassword } from "react-icons/md";
 import { PiUserRectangleBold } from "react-icons/pi";
@@ -19,15 +20,19 @@ function CardAutenticacao(cardAuthLogin) {
         setLogin({ ...login, [name]: value });
     };
 
-    const enviarRequisicaoLogin = async (loginData) => {
+    const navigate = useNavigate();
 
+    const enviarRequisicao = async (json) => {
+        console.log("mandando")
         try {
-            const response = await fetch('https://testeuaustorafrotaf.onrender.com/auth/login', {
+            const authApi = cardAuthLogin.cardAuthLogin ? 'auth/login' : 'usuario/register';
+
+            const response = await fetch(`https://testeuaustorafrotaf.onrender.com/${authApi}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(loginData),
+                body: JSON.stringify(json),
             });
 
             if (!response.ok) {
@@ -39,8 +44,9 @@ function CardAutenticacao(cardAuthLogin) {
             }
             return response.json();
 
+
         } catch (error) {
-            switch(error.cause.response?.status) {
+            switch (error.cause.response?.status) {
                 case 400:
                     console.log("erro 400 daora");
                     break;
@@ -61,12 +67,65 @@ function CardAutenticacao(cardAuthLogin) {
         }
     };
 
-    const handleSubmitLogin = async (e) => {
+    const usuarioDataReq = async (token) => {
+
+        try {
+            console.log("mandando2")
+            const coisasUser = await fetch("https://testeuaustorafrotaf.onrender.com/auth/autenticar", {
+                method: 'POST', // ou 'POST', 'PUT', etc., dependendo da sua API
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!coisasUser.ok) {
+                throw new Error('Bad response', {
+                    cause: {
+                        coisasUser,
+                    }
+                })
+            }
+
+            return coisasUser.json();
+
+        } catch(error) {
+            switch (error.cause.coisasUser?.status) {
+                case 400:
+                    console.log("erro 400 daora");
+                    break;
+                case 401:
+                    console.log("erro 401 daora");
+                    break;
+                case 403:
+                    console.log("erro 403 daora");
+                    break;
+                case 404:
+                    console.log("erro 404 daora");
+                    break;
+                case 500:
+                    console.log("erro 500 daora");
+                    break;
+            }
+            throw error
+        }
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const data = await enviarRequisicaoLogin(login);
-            console.log('Token:', data);
+            if (cardAuthLogin.cardAuthLogin) {
+                let token = await enviarRequisicao(login);
+                token = token.token
+                const usuarioData = await usuarioDataReq(token);
+                sessionStorage.setItem('Usuario', JSON.stringify(usuarioData))
+                console.log(usuarioData)
+                navigate('/cadastrousuario');
+            } else {
+                const response = await enviarRequisicao(cadastro)
+                console.log(response)
+            }
 
         } catch (error) {
             console.error('Erro:', error.message);
@@ -76,7 +135,7 @@ function CardAutenticacao(cardAuthLogin) {
     // CADASTRO
 
     const [cadastro, setCadastro] = useState({
-        apelido: '', 
+        apelido: '',
         nomeDeUsuario: '',
         senha: '',
         email: '',
@@ -89,66 +148,13 @@ function CardAutenticacao(cardAuthLogin) {
         setCadastro({ ...cadastro, [name]: value });
     };
 
-    const enviarRequisicaoCadastro = async (cadastroData) => {
 
-        try {
-            const response = await fetch('https://testeuaustorafrotaf.onrender.com/usuario/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(cadastroData),
-            });
-
-            if (!response.ok) {
-                throw new Error('Bad response', {
-                    cause: {
-                        response,
-                    }
-                })
-            }
-
-            return response.json();
-
-        } catch (error) {
-            switch(error.cause.response?.status) {
-                case 400:
-                    console.log("erro 400 daora");
-                    break;
-                case 401:
-                    console.log("erro 401 daora");
-                    break;
-                case 403:
-                    console.log("erro 403 daora");
-                    break;
-                case 404:
-                    console.log("erro 404 daora");
-                    break;
-                case 500:
-                    console.log("erro 500 daora");
-                    break;
-            }
-            throw error
-        }
-    };
-
-    const handleSubmitCadastro = async (e) => {
-        e.preventDefault();
-
-        try {
-            const data = await enviarRequisicaoCadastro(cadastro);
-            console.log('Token:', data);
-
-        } catch (error) {
-            console.error('Erro:', error.message);
-        }
-    };
 
     return (
         <>
             <div className="cardLogin">
                 {cardAuthLogin.cardAuthLogin ? (
-                    <form onSubmit={handleSubmitLogin}>
+                    <form onSubmit={handleSubmit}>
                         <legend>LOGIN</legend>
                         <div className="inputs">
                             <div className="inputContainer">
@@ -163,7 +169,7 @@ function CardAutenticacao(cardAuthLogin) {
                         <button type="submit">LOGAR</button>
                     </form>
                 ) : (
-                    <form onSubmit={handleSubmitCadastro}>
+                    <form onSubmit={handleSubmit}>
                         <legend>CADASTRO</legend>
                         <div className="inputs">
                             <div className="inputContainer">
