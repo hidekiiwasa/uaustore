@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
+import usuarioData from '../routes/autenticacao/UsuarioData';
 
 function Header() {
 
@@ -9,25 +10,27 @@ function Header() {
     const [apelido, setApelido] = useState("")
     const navigate = useNavigate();
 
-    
     useEffect(() => {
-        const usuarioLogado = sessionStorage.getItem('Usuario');
-        if(usuarioLogado) {
-            setLogado(true);
-            const usuarioObj = JSON.parse(sessionStorage.getItem('Usuario'));
-            const apelidoUsuario = usuarioObj.apelido;
-            setApelido(apelidoUsuario)
+        const headerUserInfo = async () => {
+            const usuarioLogado = sessionStorage.getItem('Token');
 
-        } else {
-            setLogado(false);
-        }
-    })
+            if(usuarioLogado) {
+                setLogado(true);
+                const token = JSON.parse(sessionStorage.getItem('Token'));
+                const userInfo = await usuarioData(token);
+                setApelido(userInfo.apelido); 
 
-    const handleLogout = async ()=>{
-        sessionStorage.removeItem('Usuario');
+            } 
+        };
+
+        headerUserInfo();
+    }, [sessionStorage.getItem('Token')]);
+
+    const handleLogout = async ()=> {
+        sessionStorage.removeItem('Token');
         setLogado(false);
         navigate('/login');
-      }
+    }
 
     return (
         <>
@@ -50,13 +53,15 @@ function Header() {
                         </div>
                         <div className="menu__nav">
                             {logadoCheck ? (
-                                <div className="menu-perfil">
-                                    <Link to="">
-                                        <CgProfile />
-                                        <span>Olá, {apelido}</span>
-                                    </Link>
-                                    <button onClick={handleLogout}>Deslogar</button>
-                                </div>
+                                apelido && (
+                                    <div className="menu-perfil">
+                                        <Link to="/perfil">
+                                            <CgProfile />
+                                            <span>Olá, {apelido}</span>
+                                        </Link>
+                                        <button onClick={handleLogout}>Deslogar</button>
+                                    </div>
+                                )
                             ) : (
                                 <ul>
                                     <li><Link to="/cadastrousuario">Cadastrar</Link></li>

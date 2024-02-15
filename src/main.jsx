@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Login from './routes/autenticacao/Login.jsx'
+import Login from './routes/autenticacao/Login.jsx';
 import App from './App.jsx';
 import CadastroUsuario from './routes/autenticacao/CadastroUsuario.jsx';
+import Perfil from './routes/user/Perfil.jsx';
+import DadosPerfil from './routes/user/DadosPerfil.jsx';
 
 
 const router = createBrowserRouter([
@@ -14,6 +16,8 @@ const router = createBrowserRouter([
     children:[
       { path: '/login', element: <Login/> },
       { path: '/cadastrousuario', element: <CadastroUsuario/> },
+      { path: '/perfil', element: <Perfil/> },
+      { path: '/dadosperfil', element: <DadosPerfil/> },
       // { path: '/', element: <Home/> },
     ]
   },
