@@ -1,9 +1,11 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../contexts/ContextoAuth';
 import { ImProfile } from "react-icons/im";
 import { Link } from 'react-router-dom';
-import usuarioData from '../autenticacao/UsuarioData';
 
 function Perfil() {
+    
+    const { usuarioData, token } = useContext(AuthContext);
 
     const [dados, setDados] = useState({
         apelido: '',
@@ -12,7 +14,6 @@ function Perfil() {
 
     useEffect(() => {
         const headerUserInfo = async () => {
-                const token = JSON.parse(sessionStorage.getItem('Token'));
                 const userInfo = await usuarioData(token);
                 setDados({
                     apelido: userInfo.apelido,
@@ -21,7 +22,7 @@ function Perfil() {
         };
 
         headerUserInfo();
-    });
+    }, []);
 
     return(
         <>

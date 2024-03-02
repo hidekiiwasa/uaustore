@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Login from './routes/autenticacao/Login.jsx';
 import App from './App.jsx';
+import Home from './routes/Home.jsx'
+import Login from './routes/autenticacao/Login.jsx';
 import CadastroUsuario from './routes/autenticacao/CadastroUsuario.jsx';
 import Perfil from './routes/user/Perfil.jsx';
 import DadosPerfil from './routes/user/DadosPerfil.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -18,10 +20,9 @@ const router = createBrowserRouter([
       { path: '/cadastrousuario', element: <CadastroUsuario/> },
       { path: '/perfil', element: <Perfil/> },
       { path: '/dadosperfil', element: <DadosPerfil/> },
-      // { path: '/', element: <Home/> },
+      { path: '/', element: <Home/> },
     ]
   },
-
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
