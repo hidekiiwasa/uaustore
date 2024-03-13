@@ -7,6 +7,7 @@ import Login from './routes/autenticacao/Login.jsx';
 import CadastroUsuario from './routes/autenticacao/CadastroUsuario.jsx';
 import Perfil from './routes/user/Perfil.jsx';
 import DadosPerfil from './routes/user/DadosPerfil.jsx';
+import ExcluirPerfil from './routes/user/ExcluirPerfil.jsx'
 
 
 
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: '/cadastrousuario', element: <CadastroUsuario/> },
       { path: '/perfil', element: <Perfil/> },
       { path: '/dadosperfil', element: <DadosPerfil/> },
+      { path: '/excluirperfil', element: <ExcluirPerfil/> },
       { path: '/', element: <Home/> },
     ]
   },
