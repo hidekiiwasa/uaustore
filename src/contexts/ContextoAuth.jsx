@@ -88,7 +88,13 @@ function AuthProvider({children}){
         }
     };
 
-    const [token, setToken] = useState(null);
+    const handleLogout = async () => {
+        setLogado(false);
+        setToken('')
+        navigate('/login');
+    };
+
+    const [token, setToken] = useState('');
     const [logado, setLogado] = useState(false);
 
     const handleLogin = async (json, api) => {
@@ -100,10 +106,10 @@ function AuthProvider({children}){
 
     const handleCadastro = async (json, api) => {
         await enviarRequisicao(json, api)
-    }
+    };
 
     return (
-        <AuthContext.Provider value={{token, logado, setLogado, handleLogin, enviarRequisicao, usuarioData, handleCadastro}}>
+        <AuthContext.Provider value={{token, logado, setLogado, setToken, handleLogin, enviarRequisicao, usuarioData, handleCadastro, handleLogout}}>
             {children}
         </AuthContext.Provider>
     )
