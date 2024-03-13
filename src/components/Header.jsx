@@ -6,27 +6,9 @@ import { CgProfile } from "react-icons/cg";
 
 function Header() {
 
-    const { usuarioData, token, logado, setLogado } = useContext(AuthContext);
+    const { usuarioData, token, logado, handleLogout } = useContext(AuthContext);
 
-    // const [logadoCheck, setLogado] = useState(false);
     const [apelido, setApelido] = useState("")
-    const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     const headerUserInfo = async () => {
-    //         const usuarioLogado = sessionStorage.getItem('Token');
-
-    //         if(usuarioLogado) {
-    //             setLogado(true);
-    //             const token = JSON.parse(sessionStorage.getItem('Token'));
-    //             const userInfo = await usuarioData(token);
-    //             setApelido(userInfo.apelido); 
-
-    //         } 
-    //     };
-
-    //     headerUserInfo();
-    // }, [sessionStorage.getItem('Token')]);
 
     useEffect(() => {
         const headerUserInfo = async () => {
@@ -39,10 +21,6 @@ function Header() {
         headerUserInfo();
     }, [logado]);
 
-    const handleLogout = async ()=> {
-        setLogado(false);
-        navigate('/login');
-    }
 
     return (
         <>
