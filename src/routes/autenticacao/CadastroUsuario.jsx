@@ -19,12 +19,12 @@ function CadastroUsuario() {
         email: '',
         telefone: '',
         tipo: 'USER'
-    });
+    })
     
     const handleChangeCadastro = async (e) => {
         const { name, value } = e.target;
         setCadastro({ ...cadastro, [name]: value });
-    };
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,7 +35,7 @@ function CadastroUsuario() {
         } catch (error) {
             console.error('Erro:', error.message);
         }
-    };
+    }
 
     
     return(
