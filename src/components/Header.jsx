@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/ContextoAuth';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
 
@@ -16,7 +16,7 @@ function Header() {
                 const userInfo = await usuarioData(token);
                 setApelido(userInfo.apelido); 
             } 
-        };
+        }
 
         headerUserInfo();
     }, [logado]);
