@@ -1,8 +1,11 @@
 import { createContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext({})
 
 function AuthProvider({children}){
+
+    const navigate = useNavigate();
 
     const enviarRequisicao = async(json, api) => {
         try {
@@ -12,7 +15,7 @@ function AuthProvider({children}){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(json),
-            });
+            })
     
             if (!response.ok) {
                 throw new Error('Bad response', {
@@ -44,7 +47,7 @@ function AuthProvider({children}){
             }
             throw error
         }
-    };
+    }
 
     const usuarioData = async (token) => {
         try {
@@ -54,7 +57,7 @@ function AuthProvider({children}){
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-            });
+            })
     
             if (!coisasUser.ok) {
                 throw new Error('Bad response', {
@@ -86,27 +89,28 @@ function AuthProvider({children}){
             }
             throw error
         }
-    };
+    }
 
+    const [token, setToken] = useState('');
+    const [logado, setLogado] = useState(false);
+    
     const handleLogout = async () => {
         setLogado(false);
         setToken('')
         navigate('/login');
-    };
+    }
 
-    const [token, setToken] = useState('');
-    const [logado, setLogado] = useState(false);
 
     const handleLogin = async (json, api) => {
         const resposta = await enviarRequisicao(json, api);
         const newToken = resposta.token;
         setToken(newToken);
         setLogado(true);
-    };
+    }
 
     const handleCadastro = async (json, api) => {
-        await enviarRequisicao(json, api)
-    };
+        await enviarRequisicao(json, api);
+    }
 
     return (
         <AuthContext.Provider value={{token, logado, setLogado, setToken, handleLogin, enviarRequisicao, usuarioData, handleCadastro, handleLogout}}>
