@@ -10,13 +10,13 @@ function ExcluirPerfil() {
     const deletarUser = async (token) => {
         console.log(token)
         try {
-            const response = await fetch("/usuario/desativar", {
+            const response = await fetch("https://testeuaustorafrotaf.onrender.com/usuario/desativar", {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 }
-            });
+            })
 
             if (!response.ok) {
                 throw new Error('Bad response', {
@@ -50,7 +50,7 @@ function ExcluirPerfil() {
             }
             throw error
         }
-    };
+    }
 
     return (
         <>
