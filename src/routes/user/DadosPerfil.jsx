@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/ContextoAuth';
 
 function DadosPerfil() {
@@ -15,7 +15,7 @@ function DadosPerfil() {
         email: '',
         telefone: ''
 
-    });
+    })
 
     useEffect(() => {
         const dadosUserInfo = async () => {
@@ -27,8 +27,8 @@ function DadosPerfil() {
                 senha: userInfo.senha,
                 email: userInfo.email,
                 telefone: userInfo.telefone
-            });
-        };
+            })
+        }
 
         dadosUserInfo();
     }, [token]);
@@ -36,7 +36,7 @@ function DadosPerfil() {
     const handleChangeAlterar = async (e) => {
         const { name, value } = e.target;
         setDados({ ...dados, [name]: value });
-    };
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,7 +45,7 @@ function DadosPerfil() {
         } catch (error) {
             console.error('Erro:', error.message);
         }
-    };
+    }
 
     const updateUser = async (dataUser, token) => {
         
@@ -59,7 +59,7 @@ function DadosPerfil() {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json; charset=UTF-8',
             },
-          });
+          })
 
           const data = await response.json()
           const novoToken = data.token
@@ -73,7 +73,7 @@ function DadosPerfil() {
           console.error('Erro ao fazer requisição:', error);
 
         }
-      };
+      }
     
 
     return(
